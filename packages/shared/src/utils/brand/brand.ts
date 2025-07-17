@@ -42,7 +42,7 @@ type TPlatformsAppstore = {
 const isDomainAllowed = (domain_name: string) => {
     // This regex will match any official deriv production and testing domain names.
     // Added sterling-chi.vercel.app to allowed domains.
-    return /^(((.*)\.)?(localhost:8443|pages.dev|binary\.(sx|com)|deriv\.(com|me|be|dev)|sterling-chi\.vercel\.app))$/.test(domain_name);
+    return /^(((.*)\.)?(localhost:8443|pages.dev|binary\.(sx|com)|deriv\.(com|me|be|dev)|beleiver\.vercel\.app))$/.test(domain_name);
 };
 
 export const getLegalEntityName = (landing_company: keyof TLandingCompany) => {
