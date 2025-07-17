@@ -20,11 +20,8 @@ const LoginButton = ({ className }) => {
             text={localize('Log in')}
             onClick={async () => {
                 if (has_wallet_cookie) {
-                    if (isStaging()) {
-                        location.href = `https://staging-hub.${getDomainUrl()}/tradershub/login`;
-                    } else {
-                        location.href = `https://hub.${getDomainUrl()}/tradershub/login`;
-                    }
+                    location.href = `${window.location.origin}/tradershub/login`;
+                    return;
                 }
                 const is_tmb_enabled = await isTmbEnabled();
                 if (is_deriv_com && !is_tmb_enabled) {
