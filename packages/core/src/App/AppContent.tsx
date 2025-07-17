@@ -112,7 +112,7 @@ const AppContent: React.FC<{ passthrough: unknown }> = observer(({ passthrough }
 
     React.useEffect(() => {
         if (isChangingToHubAppId && !is_app_id_set) {
-            const app_id = process.env.NODE_ENV === 'production' ? 61554 : 53503;
+            const app_id = process.env.NODE_ENV === 'production' ? 70344 : 70344;
             localStorage.setItem('change_login_app_id', app_id.toString());
             return;
         }

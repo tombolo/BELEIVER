@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import { Button } from '@deriv/components';
 import { useTMB } from '@deriv/hooks';
-import { getDomainUrl, isStaging, redirectToLogin } from '@deriv/shared';
+import { isStaging, redirectToLogin } from '@deriv/shared';
 import { getLanguage, localize } from '@deriv/translations';
 import { requestOidcAuthentication } from '@deriv-com/auth-client';
 
@@ -20,8 +20,11 @@ const LoginButton = ({ className }) => {
             text={localize('Log in')}
             onClick={async () => {
                 if (has_wallet_cookie) {
-                    location.href = `${window.location.origin}/tradershub/login`;
-                    return;
+                    if (isStaging()) {
+                        location.href = 'https://staging-hub.deriv.com/tradershub/login';
+                    } else {
+                        location.href = 'https://hub.deriv.com/tradershub/login';
+                    }
                 }
                 const is_tmb_enabled = await isTmbEnabled();
                 if (is_deriv_com && !is_tmb_enabled) {
