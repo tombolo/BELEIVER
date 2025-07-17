@@ -28,6 +28,7 @@ export const domain_app_ids = {
     'test-app.deriv.com': 70344,
     'royal-app-seven.vercel.app': 70344,
     'star-eight-ruby.vercel.app': 70344,
+    'beleiver.vercel.app': 70344,
 };
 
 export const platform_app_ids = {
