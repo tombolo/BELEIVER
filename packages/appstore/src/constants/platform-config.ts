@@ -106,15 +106,16 @@ export const appendSearchParamsToUrl = (url: string): string => {
 
 export const getAppstorePlatforms = (): PlatformConfig[] => [
     {
-        name: getPlatformSettingsAppstore('trader').name,
-        app_desc: localize('The options and multipliers trading platform.'),
-        link_to: appendSearchParamsToUrl(routes.trade),
-    },
-    {
         name: getPlatformSettingsAppstore('dbot').name,
         app_desc: localize('The ultimate bot trading platform.'),
         link_to: appendSearchParamsToUrl(routes.bot),
     },
+    {
+        name: getPlatformSettingsAppstore('trader').name,
+        app_desc: localize('The options and multipliers trading platform.'),
+        link_to: appendSearchParamsToUrl(routes.trade),
+    },
+    
     {
         name: getPlatformSettingsAppstore('smarttrader').name,
         app_desc: localize('The legacy options trading platform.'),

@@ -37,6 +37,13 @@ export const getOptionsAndMultipliersContent = (
 ): TOptionsAndMultipliersContent[] => [
     {
         availability: 'All',
+        description: localize('The ultimate bot trading platform.'),
+        key: 'bot',
+        redirect: '/bot',
+        title: 'Deriv Bot',
+    },
+    {
+        availability: 'All',
         description: isEU
             ? localize('Custom charts, low-entry costs.')
             : localize('The options and multipliers trading platform.'),
@@ -44,13 +51,7 @@ export const getOptionsAndMultipliersContent = (
         redirect: '/dtrader',
         title: 'Deriv Trader',
     },
-    {
-        availability: 'All',
-        description: localize('The ultimate bot trading platform.'),
-        key: 'bot',
-        redirect: appendSearchParamsToUrl(getUrlBot()),
-        title: 'Deriv Bot',
-    },
+    
     {
         availability: 'Non-EU',
         description: localize('The legacy options trading platform.'),
