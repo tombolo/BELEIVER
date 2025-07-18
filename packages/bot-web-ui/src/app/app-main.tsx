@@ -23,12 +23,12 @@ const originToDomainMap = {
 
 const App = ({ passthrough }: TAppProps) => {
     // Extract the correct domain based on the current origin
-    const targetDomain = originToDomainMap[window.location.host as keyof typeof originToDomainMap];
+    // const targetDomain = originToDomainMap[window.location.host as keyof typeof originToDomainMap];
 
     // Redirect to the dbot.deriv.com only from staging and production
-    if (targetDomain) {
-        window.location.assign(`https://${targetDomain}`);
-    }
+    // if (targetDomain) {
+    //    window.location.assign(`https://${targetDomain}`);
+   // }
 
     const { root_store, WS } = passthrough;
     React.useEffect(() => {
