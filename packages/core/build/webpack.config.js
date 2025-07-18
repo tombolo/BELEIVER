@@ -13,12 +13,7 @@ module.exports = function (env) {
                 publicPath: base,
                 watch: true,
             },
-            open: {
-                app: {
-                    name: openChromeBasedOnPlatform(process.platform),
-                },
-                target: sub_path,
-            },
+            open: false,
             host: 'localhost',
             server: 'https',
 
