@@ -113,8 +113,7 @@ export const getAppstorePlatforms = (): PlatformConfig[] => [
     {
         name: getPlatformSettingsAppstore('dbot').name,
         app_desc: localize('The ultimate bot trading platform.'),
-        link_to: appendSearchParamsToUrl(getUrlBot()),
-        is_external: true,
+        link_to: appendSearchParamsToUrl(routes.bot),
     },
     {
         name: getPlatformSettingsAppstore('smarttrader').name,
