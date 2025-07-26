@@ -69,8 +69,15 @@ const getModules = () => {
     const modules = [
         {
             path: routes.bot,
-            component: Bot,
-            // Don't use `Localize` component since native html tag like `option` cannot render them
+            component: props => (
+                <Bot
+                    {...props}
+                    passthrough={{
+                        root_store: props.passthrough?.root_store,
+                        WS: props.passthrough?.WS,
+                    }}
+                />
+            ),
             getTitle: () => localize('Bot'),
         },
         {
