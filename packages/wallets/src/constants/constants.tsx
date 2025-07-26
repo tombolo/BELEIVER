@@ -35,40 +35,40 @@ export const getOptionsAndMultipliersContent = (
     localize: ReturnType<typeof useTranslations>['localize'],
     isEU?: boolean
 ): TOptionsAndMultipliersContent[] => [
-    {
-        availability: 'All',
-        description: localize('The ultimate bot trading platform.'),
-        key: 'bot',
-        redirect: '/bot',
-        title: 'Deriv Bot',
-    },
-    {
-        availability: 'All',
-        description: isEU
-            ? localize('Custom charts, low-entry costs.')
-            : localize('The options and multipliers trading platform.'),
-        key: 'trader',
-        redirect: '/dtrader',
-        title: 'Deriv Trader',
-    },
-    
-    {
-        availability: 'Non-EU',
-        description: localize('The legacy options trading platform.'),
-        isExternal: true,
-        key: 'smarttrader',
-        redirect: appendSearchParamsToUrl(getUrlSmartTrader()),
-        title: 'SmartTrader',
-    },
-    {
-        availability: 'Non-EU',
-        description: localize('The mobile app for trading multipliers and accumulators.'),
-        isExternal: true,
-        key: 'derivgo',
-        redirect: getStaticUrl('/deriv-go'),
-        title: 'Deriv GO',
-    },
-];
+        {
+            availability: 'All',
+            description: isEU
+                ? localize('Custom charts, low-entry costs.')
+                : localize('The options and multipliers trading platform.'),
+            key: 'trader',
+            redirect: '/dtrader',
+            title: 'Deriv Trader',
+        },
+        {
+            availability: 'Non-EU',
+            description: localize('The ultimate bot trading platform.'),
+            isExternal: true,
+            key: 'bot',
+            redirect: appendSearchParamsToUrl(getUrlBot()),
+            title: 'Deriv Bot',
+        },
+        {
+            availability: 'Non-EU',
+            description: localize('The legacy options trading platform.'),
+            isExternal: true,
+            key: 'smarttrader',
+            redirect: appendSearchParamsToUrl(getUrlSmartTrader()),
+            title: 'SmartTrader',
+        },
+        {
+            availability: 'Non-EU',
+            description: localize('The mobile app for trading multipliers and accumulators.'),
+            isExternal: true,
+            key: 'derivgo',
+            redirect: getStaticUrl('/deriv-go'),
+            title: 'Deriv GO',
+        },
+    ];
 
 export const ACCOUNT_VERIFICATION_STATUSES = {
     EXPIRED: 'expired',

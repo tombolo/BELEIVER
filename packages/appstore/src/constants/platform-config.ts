@@ -63,46 +63,59 @@ type ClientAccount = {
 export const appendSearchParamsToUrl = (url: string): string => {
     const search_params = new URLSearchParams(window.location.search);
 
+    // Get active loginid from sessionStorage
     const active_loginid = sessionStorage.getItem('active_wallet_loginid') || sessionStorage.getItem('active_loginid');
 
+    // Get currency from client.accounts if active_loginid exists
     if (active_loginid) {
         const client_accounts_str = localStorage.getItem('client.accounts') || '{}';
-        const client_accounts: Record<string, ClientAccount> = JSON.parse(client_accounts_str || '{}');
-        const active_account = client_accounts[active_loginid];
 
-        if (active_account) {
-            if (active_loginid.includes('VRW') || active_loginid.includes('VRTC')) {
-                search_params.set('account', 'demo');
-            } else if (active_account.currency) {
-                search_params.set('account', active_account.currency);
+        if (client_accounts_str) {
+            const client_accounts: Record<string, ClientAccount> = JSON.parse(client_accounts_str);
+
+            // Find the account that matches the active loginid
+            const active_account = client_accounts[active_loginid];
+
+            // If account found, set account parameter based on account type
+            if (active_account) {
+                // If loginid contains VRW or VRTC, it's a demo account
+                if (active_loginid?.includes('VRW') || active_loginid?.includes('VRTC')) {
+                    search_params.set('account', 'demo');
+                } else if (active_account.currency) {
+                    // Otherwise use the currency
+                    search_params.set('account', active_account.currency);
+                }
             }
         }
     }
 
+    // If no search params to append, return original URL
     if (!search_params.toString()) return url;
 
-    const url_obj = new URL(`http://fake.local${url}`); // 👈 avoid using window.location.origin
+    const url_obj = new URL(url, window.location.origin);
+    const existing_params = url_obj.searchParams;
 
     search_params.forEach((value, key) => {
-        url_obj.searchParams.set(key, value);
+        existing_params.set(key, value);
     });
 
-    return `${url_obj.pathname}${url_obj.search}`; // 👈 return only path + query string
+    url_obj.search = existing_params.toString();
+
+    return url.startsWith('http') ? url_obj.toString() : `${url_obj.pathname}${url_obj.search}`;
 };
 
-
 export const getAppstorePlatforms = (): PlatformConfig[] => [
-    {
-        name: getPlatformSettingsAppstore('dbot').name,
-        app_desc: localize('The ultimate bot trading platform.'),
-        link_to: appendSearchParamsToUrl(routes.bot),
-    },
     {
         name: getPlatformSettingsAppstore('trader').name,
         app_desc: localize('The options and multipliers trading platform.'),
         link_to: appendSearchParamsToUrl(routes.trade),
     },
-    
+    {
+        name: getPlatformSettingsAppstore('dbot').name,
+        app_desc: localize('The ultimate bot trading platform.'),
+        link_to: appendSearchParamsToUrl(getUrlBot()),
+        is_external: true,
+    },
     {
         name: getPlatformSettingsAppstore('smarttrader').name,
         app_desc: localize('The legacy options trading platform.'),
