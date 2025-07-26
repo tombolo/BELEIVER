@@ -121,7 +121,7 @@ const RouteWithSubRoutes = observer(route => {
                 <React.Fragment>
                     {has_default_subroute && pathname === route.path && <Redirect to={default_subroute.path} />}
                     {is_valid_route ? (
-                        <route.component {...props} routes={route.routes} passthrough={route.passthrough} />
+                        <route.component {...props} routes={route.routes} passthrough={props.passthrough} />
                     ) : (
                         <Page404 />
                     )}
