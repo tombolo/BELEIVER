@@ -39,21 +39,16 @@ export const getUrlSmartTrader = () => {
 };
 
 export const getUrlBot = () => {
-    const { is_staging_deriv_app } = getPlatformFromUrl();
+    // Use internal route instead of external URL
     const localize_language = LocalStorageUtils.getValue<string>('i18n_language');
     const url_lang = URLUtils.getQueryParameter('lang');
     const i18n_language = localize_language || url_lang || 'en';
 
-    let base_link = '';
+    // If you want to keep the language as a query param:
+    return `/bot?lang=${i18n_language.toLowerCase()}`;
 
-    if (is_staging_deriv_app) {
-        base_link = deriv_urls.BOT_STAGING;
-    } else {
-        base_link = deriv_urls.BOT_PRODUCTION;
-    }
-
-    const url = `${base_link}?lang=${i18n_language.toLowerCase()}`;
-    return url;
+    // Or, if you don't need the language param, just:
+    // return '/bot';
 };
 
 export const getUrlP2P = (is_language_required = true) => {
